@@ -17,6 +17,7 @@
             ],
             "rttConfig": {
                 "enabled": true,
+                "polling_interval": 1,
                 "address": "auto",
                 "clearSearch": false,
                 "decoders": [

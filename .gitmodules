@@ -1,0 +1,6 @@
+[submodule "Drivers/ATC"]
+	path = Drivers/ATC
+	url = https://github.com/kossnikita/atc.git
+[submodule "Drivers/GSM"]
+	path = Drivers/GSM
+	url = https://github.com/kossnikita/gsm_v5.git

@@ -6,7 +6,13 @@
 - ???
 - Profit
 
+## Requirements
+
+- [arm-gnu-toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads)
+- [CMake](https://cmake.org/download/)
+- [Ninja](https://github.com/ninja-build/ninja/releases)
+
 ## Authors
 
-**kossnikita**
-**honloan**
+- **kossnikita**
+- **honloan**

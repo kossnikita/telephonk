@@ -15,6 +15,7 @@ find_program(CMAKE_ASM_COMPILER
 set(CMAKE_C_FLAGS_INIT "\
  -mthumb\
  -mcpu=cortex-m4\
+ -specs=nosys.specs\
  -fstrict-volatile-bitfields\
  -ffunction-sections\
  -Wall\

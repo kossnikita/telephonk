@@ -28,6 +28,17 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "stm32f4xx_ll_usart.h"
+#include "stm32f4xx_ll_rcc.h"
+#include "stm32f4xx_ll_bus.h"
+#include "stm32f4xx_ll_cortex.h"
+#include "stm32f4xx_ll_system.h"
+#include "stm32f4xx_ll_utils.h"
+#include "stm32f4xx_ll_pwr.h"
+#include "stm32f4xx_ll_gpio.h"
+#include "stm32f4xx_ll_dma.h"
+
+#include "stm32f4xx_ll_exti.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -49,6 +60,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -57,18 +70,22 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define _GSM_KEY_PIN_Pin GPIO_PIN_15
+#define _GSM_KEY_PIN_GPIO_Port GPIOC
 #define IMPS_Pin GPIO_PIN_0
 #define IMPS_GPIO_Port GPIOA
+#define RING_N_Pin GPIO_PIN_7
+#define RING_N_GPIO_Port GPIOA
 #define OPEN_Pin GPIO_PIN_14
 #define OPEN_GPIO_Port GPIOB
 #define DIAL_Pin GPIO_PIN_15
 #define DIAL_GPIO_Port GPIOB
+#define RING_P_Pin GPIO_PIN_8
+#define RING_P_GPIO_Port GPIOA
 #define GSM_TX_Pin GPIO_PIN_9
 #define GSM_TX_GPIO_Port GPIOA
 #define GSM_RX_Pin GPIO_PIN_10
 #define GSM_RX_GPIO_Port GPIOA
-#define RING_Pin GPIO_PIN_11
-#define RING_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
 
