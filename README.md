@@ -12,6 +12,13 @@
 - [CMake](https://cmake.org/download/)
 - [Ninja](https://github.com/ninja-build/ninja/releases)
 
+## Build
+
+```bash
+cmake --toolchain arm-gnu-toolchain.cmake -G Ninja -B build
+cmake --build build
+```
+
 ## Authors
 
 - **kossnikita**
