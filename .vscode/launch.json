@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "cortex-debug",
+            "name": "Cortex Debug",
+            "cwd": "${workspaceFolder}",
+            //"serverpath": "D:/ARM/tool-openocd-at32-0.1100.220911/bin/openocd.exe",
+            "executable": "./build/firmware",
+            "request": "launch",
+            "runToEntryPoint": "main",
+            "servertype": "openocd",
+            "svdFile": "${workspaceFolder}/STM32F411.svd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f4x.cfg"
+            ],
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "clearSearch": false,
+                "decoders": [
+                    {
+                        "port": 0,
+                        "type": "console"
+                    },
+                ]
+            },
+        }
+    ]
+}
