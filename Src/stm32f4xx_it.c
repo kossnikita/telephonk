@@ -44,6 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 static uint8_t digit = 0;
+static uint8_t digit_count = 0;
 static uint8_t number[20];
 static uint8_t* last_digit = number;
 /* USER CODE END PV */
@@ -208,11 +209,13 @@ void SysTick_Handler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
-  // static uint32_t last_tick;
-  // uint32_t current_tick = __HAL_TIM_GET_COMPARE(&htim2, TIM_CHANNEL_1);
-  // uint32_t period = current_tick - last_tick;
-  // last_tick = current_tick;
-  digit++;
+   static uint32_t last_tick;
+   uint32_t current_tick = __HAL_TIM_GET_COMPARE(&htim2, TIM_CHANNEL_1);
+   uint32_t period = current_tick - last_tick;
+   if (period>1200000){
+    last_tick = current_tick;
+    digit++;
+   }
   __HAL_TIM_SET_COUNTER(&htim3, 1);
   __HAL_TIM_CLEAR_IT(&htim3, TIM_IT_UPDATE);
   __HAL_TIM_CLEAR_IT(&htim3, TIM_IT_CC1);
@@ -236,18 +239,29 @@ void TIM3_IRQHandler(void)
     }
     SEGGER_RTT_printf(0, "Digit %u\r\n", digit);
     *last_digit++ = digit;
+    digit_count++;
     digit = 0;
   }
   if (__HAL_TIM_GET_FLAG(&htim3, TIM_IT_UPDATE) == SET) {
     SEGGER_RTT_WriteString(0, "Number is ");
     uint8_t* current_digit = number;
+    
     while (current_digit != last_digit) {
       SEGGER_RTT_printf(0, "%u", *current_digit++);
     }
     SEGGER_RTT_WriteString(0, "\r\n");
+    Send_Dial(number, digit_count);
+
     last_digit = number;
+    digit_count = 0;
+
     HAL_TIM_Base_Stop_IT(&htim3);
     HAL_TIM_OC_Stop_IT(&htim3, TIM_CHANNEL_1);
+
+    //gsm_msg_send("+79138403246", "TEST MSG 1");
+
+    //b_Number=1;
+
   }
   /* USER CODE END TIM3_IRQn 0 */
   HAL_TIM_IRQHandler(&htim3);

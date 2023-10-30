@@ -42,7 +42,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "stdbool.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -66,6 +66,10 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
+void Send_Dial(uint8_t *num, uint8_t len);
+void Enable_Ring(void);
+void Down_Phone(void);
+void Up_Phone(void);
 
 /* USER CODE END EFP */
 
