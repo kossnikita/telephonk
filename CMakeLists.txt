@@ -25,6 +25,8 @@ target_link_options(firmware PRIVATE
 
 target_compile_definitions(firmware PRIVATE 
     -DSTM32F411xE=1
+    -DUSE_HAL_DRIVER=1
+    -DUSE_FULL_LL_DRIVER=1
 )
 
 find_program(OPENOCD
@@ -34,6 +36,6 @@ find_program(OPENOCD
 add_custom_target(
     flash 
     DEPENDS firmware 
-    COMMAND ${OPENOCD} -d1 -f ../phone.cfg -c "program $<TARGET_FILE:firmware> verify reset exit"
+    COMMAND ${OPENOCD} -d1 -s ${CMAKE_SOURCE_DIR} -f phone.cfg -c "program $<TARGET_FILE:firmware> verify reset exit"
 )
 

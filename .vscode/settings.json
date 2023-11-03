@@ -5,5 +5,6 @@
     "files.associations": {
         "*.h": "c"
     },
-    "C_Cpp.clang_format_style": "{ BasedOnStyle: Microsoft, UseTab: Never, IndentWidth: 2, TabWidth: 2}",
+    "C_Cpp.clang_format_style": "file",
+    "cortex-debug.variableUseNaturalFormat": false,
 }

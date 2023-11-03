@@ -6,24 +6,22 @@
             "name": "Cortex Debug",
             "cwd": "${workspaceFolder}",
             //"serverpath": "D:/ARM/tool-openocd-at32-0.1100.220911/bin/openocd.exe",
-            "executable": "./build/firmware",
+            "executable": "./build/firmware.elf",
             "request": "launch",
-            "runToEntryPoint": "main",
             "servertype": "openocd",
             "svdFile": "${workspaceFolder}/STM32F411.svd",
             "configFiles": [
-                "interface/stlink.cfg",
-                "target/stm32f4x.cfg"
+                "phone.cfg",
             ],
             "rttConfig": {
                 "enabled": true,
-                "polling_interval": 1,
-                "address": "auto",
                 "clearSearch": false,
                 "decoders": [
                     {
                         "port": 0,
-                        "type": "console"
+                        "type": "console",
+                        "label": "Telephonk console",
+                        "noprompt": true
                     },
                 ]
             },
