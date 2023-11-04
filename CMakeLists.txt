@@ -33,9 +33,24 @@ find_program(OPENOCD
     openocd
 )
 
+find_program(CLANG_FORMAT
+    clang-format
+)
+
 add_custom_target(
     flash 
     DEPENDS firmware 
     COMMAND ${OPENOCD} -d1 -s ${CMAKE_SOURCE_DIR} -f phone.cfg -c "program $<TARGET_FILE:firmware> verify reset exit"
 )
 
+file(GLOB_RECURSE ALL_SOURCE_FILES *.c *.h)
+
+add_custom_target(
+    clang-format
+    COMMAND ${CLANG_FORMAT} -i ${ALL_SOURCE_FILES}
+)
+
+add_custom_target(
+    clang-format-check
+    COMMAND ${CLANG_FORMAT} --dry-run --Werror ${ALL_SOURCE_FILES}
+)
