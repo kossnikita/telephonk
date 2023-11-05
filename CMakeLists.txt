@@ -43,7 +43,7 @@ add_custom_target(
     COMMAND ${OPENOCD} -d1 -s ${CMAKE_SOURCE_DIR} -f phone.cfg -c "program $<TARGET_FILE:firmware> verify reset exit"
 )
 
-file(GLOB_RECURSE ALL_SOURCE_FILES *.c *.h)
+file(GLOB_RECURSE ALL_SOURCE_FILES Src/*.c Drivers/*.c Inc/*.h Drivers/*.h)
 
 add_custom_target(
     clang-format
