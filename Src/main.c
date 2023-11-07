@@ -132,7 +132,7 @@ int main(void)
     if (Number_len > 0 && Number_len < 32)
     {
       char num_string[32];
-      uint8_t i, k = 0;
+      uint8_t i = 0, k = 0;
       if (number[0] == 8 && Number_len == 11)
       {
         num_string[0] = '+';
