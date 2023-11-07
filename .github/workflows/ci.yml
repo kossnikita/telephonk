@@ -14,17 +14,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        submodules: recursive
+    - name: apt packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install cppcheck
     - name: Install Arm GNU Toolchain (arm-none-eabi-gcc)
       uses: carlosperate/arm-none-eabi-gcc-action@v1
       with:
         release: 'latest'
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} --toolchain=${{github.workspace}}/arm-gnu-toolchain.cmake
-
+    - name: Cppcheck
+      run: cppcheck --enable=warning --platform=arm32-wchar_t4.xml --std=c++20 -I./Inc/ -I./Drivers/ATC/ -I./Drivers/GSM/ -I./Drivers/CMSIS/Include/ -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include/ -I./Drivers/RTT/inc/ -I./Drivers/STM32F4xx_HAL_Driver/Inc/  -i./Drivers/ -i./build/ -DSTM32F411xE=1 -DUSE_HAL_DRIVER=1 -DUSE_FULL_LL_DRIVER=1 -D__GNUC__=1 --library=gnu.cfg --error-exitcode=1 ${{github.workspace}}
     - name: Check format
       uses: jidicula/clang-format-action@v4.11.0
       with:
